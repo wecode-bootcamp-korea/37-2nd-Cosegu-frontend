@@ -8,7 +8,7 @@ import variables from "styles/variables";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <ThemeProvider theme={theme} variables={variables}>
+  <ThemeProvider theme={{ style: theme, variables }}>
     <GlobalStyle />
     <Router />
   </ThemeProvider>
