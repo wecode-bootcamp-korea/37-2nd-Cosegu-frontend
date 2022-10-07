@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "프론트엔드 구함",
+    "career": "경력",
+    "employment": "정규직"
+  },
+  {
+    "id": 2,
+    "title": "백엔드 구함",
+    "career": "경력",
+    "employment": "정규직"
+  },
+  {
+    "id": 3,
+    "title": "프론트엔드 구함",
+    "career": "신입",
+    "employment": "계약직"
+  }
+]
