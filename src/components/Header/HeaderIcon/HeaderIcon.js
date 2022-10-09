@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import LikeIcon from "./LikeIcon";
 import LoginIcon from "./LoginIcon";
 import LogoutIcon from "./LogoutIcon";
 
 const HeaderIcon = () => {
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("TOKEN")) setIsLogin(true);
+  }, []);
+
   return (
     <IconWrap>
       <LikeIcon />
-      <LoginIcon />
-      <LogoutIcon />
+      <LoginIcon isLogin={isLogin} />
+      {isLogin && <LogoutIcon isLogin={isLogin} setIsLogin={setIsLogin} />}
     </IconWrap>
   );
 };
