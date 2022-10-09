@@ -5,7 +5,7 @@ import styled from "styled-components";
 import theme from "styles/theme";
 
 const JobOpening = ({ recruit }) => {
-  const { id, location, title, link, qualification } = recruit;
+  const { id, location, title, link, qualification, mainBusiness } = recruit;
   const [isOpen, setIsOpen] = useState(false);
 
   const openContent = () => {
@@ -24,7 +24,7 @@ const JobOpening = ({ recruit }) => {
     >
       <S.CrewRecruitBtn onClick={openContent}>
         <S.Qualification isOpen={isOpen} active={{ fontWeight: "800" }}>
-          {qualification}
+          {mainBusiness}
         </S.Qualification>
         <S.Title
           isOpen={isOpen}
