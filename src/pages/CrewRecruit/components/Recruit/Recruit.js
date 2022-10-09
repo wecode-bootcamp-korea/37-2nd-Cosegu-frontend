@@ -7,9 +7,9 @@ import { API } from "config";
 const Recruit = ({ recruit }) => {
   const [recruitData, setRecruitData] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const categoryId = searchParams.getAll("categoryid");
+  const categoryId = searchParams.getAll("categoryId");
 
-  const makeURL = categoryId?.map((url) => `categoryid=${url}`);
+  const makeURL = categoryId?.map((url) => `categoryId=${url}`);
   const makeParams =
     categoryId.length === 0
       ? "?limit=20&offset=0"
@@ -18,20 +18,20 @@ const Recruit = ({ recruit }) => {
   useEffect(() => {
     fetch(`${API.CREWRECRUIT}${makeParams}`)
       .then((res) => res.json())
-      .then((data) => setRecruitData(data));
-  }, [categoryId]);
+      .then((data) => setRecruitData(data.recruits));
+  }, [makeParams]);
 
   const handleParams = (category) => {
     if (categoryId.includes(category.toString())) {
       const filterParams = categoryId.filter(
         (el) => el !== category.toString()
       );
-      searchParams.delete("categoryid");
+      searchParams.delete("categoryId");
       setSearchParams(searchParams);
-      filterParams.map((params) => searchParams.append("categoryid", params));
+      filterParams.map((params) => searchParams.append("categoryId", params));
       setSearchParams(searchParams);
     } else {
-      searchParams.append("categoryid", category);
+      searchParams.append("categoryId", category);
     }
     setSearchParams(searchParams);
   };
@@ -60,7 +60,7 @@ const Recruit = ({ recruit }) => {
         </S.RecruitCategories>
       </S.RecruitTab>
       {recruitData !== undefined &&
-        recruitData.map((recruit) => {
+        recruitData?.map((recruit) => {
           return <JobOpening key={recruit.reruitId} recruit={recruit} />;
         })}
     </S.Container>
