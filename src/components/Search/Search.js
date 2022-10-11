@@ -30,18 +30,22 @@ const S = {
   `,
 };
 
-const Search = () => {
+const Search = ({ onChange, label, placeholder, value, onClick }) => {
   return (
     <S.Wrapper>
       <S.KeyboardBox>
-        <S.Label htmlFor="keywordSearch">공고검색</S.Label>
+        <S.Label htmlFor="keywordSearch">{label}</S.Label>
         <SearchField
           id="keywordSearch"
           type="text"
-          placeholder="찾으시는 공고의 키워드를 입력하세요"
+          placeholder={placeholder}
           autocomplete="off"
+          onChange={onChange}
+          value={value}
         />
-        <S.Button type="button">검색</S.Button>
+        <S.Button type="button" onClick={onClick}>
+          검색
+        </S.Button>
       </S.KeyboardBox>
     </S.Wrapper>
   );

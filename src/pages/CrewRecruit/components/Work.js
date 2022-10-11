@@ -21,6 +21,7 @@ const WorkContainer = styled.section`
   background-color: #f7f7f7;
 `;
 const WorkInner = styled.div``;
+
 const WorkTitle = styled.p`
   margin-bottom: 50px;
   font-size: 60px;

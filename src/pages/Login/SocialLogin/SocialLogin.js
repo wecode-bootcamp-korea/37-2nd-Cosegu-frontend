@@ -5,6 +5,7 @@ import variables from "styles/variables";
 
 const SocialLogin = () => {
   const NAVER_AUTH_URI = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.REACT_APP_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&state=cosegu`;
+  // const NAVER_AUTH_URI = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=M7RqsEOvkI7Fb33qpPnq&redirect_uri=http%3A%2F%2F10.58.52.199%3A3000%2Fuser%2Fsignin&state=cosegu`;
 
   const loginHandler = () => {
     window.location.href = NAVER_AUTH_URI;

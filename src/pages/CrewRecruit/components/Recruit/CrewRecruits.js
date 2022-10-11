@@ -62,7 +62,7 @@ const CrewRecruitDetail = styled.div`
   ${(props) => props.theme.variables.flexSet("flex-start", "flex-start")}
   border: 1px solid #ddd;
 `;
-const DetailImg = styled.img``;
+// const DetailImg = styled.img``;
 const DetailSide = styled.div`
   ${(props) => props.theme.variables.flexSet()}
   flex-direction: column;
