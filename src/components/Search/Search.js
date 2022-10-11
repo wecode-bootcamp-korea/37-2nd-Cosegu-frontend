@@ -2,6 +2,27 @@ import React from "react";
 import styled from "styled-components";
 import SearchField from "components/Search/SearchField";
 
+const Search = ({ onChange, label, placeholder, value, onClick }) => {
+  return (
+    <S.Wrapper>
+      <S.KeyboardBox>
+        <S.Label htmlFor="keywordSearch">{label}</S.Label>
+        <SearchField
+          id="keywordSearch"
+          type="text"
+          placeholder={placeholder}
+          autocomplete="off"
+          onChange={onChange}
+          value={value}
+        />
+        <S.Button type="button" onClick={onClick}>
+          검색
+        </S.Button>
+      </S.KeyboardBox>
+    </S.Wrapper>
+  );
+};
+
 const S = {
   Wrapper: styled.div`
     position: relative;
@@ -28,27 +49,6 @@ const S = {
     text-indent: -9999px;
     overflow: hidden;
   `,
-};
-
-const Search = ({ onChange, label, placeholder, value, onClick }) => {
-  return (
-    <S.Wrapper>
-      <S.KeyboardBox>
-        <S.Label htmlFor="keywordSearch">{label}</S.Label>
-        <SearchField
-          id="keywordSearch"
-          type="text"
-          placeholder={placeholder}
-          autocomplete="off"
-          onChange={onChange}
-          value={value}
-        />
-        <S.Button type="button" onClick={onClick}>
-          검색
-        </S.Button>
-      </S.KeyboardBox>
-    </S.Wrapper>
-  );
 };
 
 export default Search;

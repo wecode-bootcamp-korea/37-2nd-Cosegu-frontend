@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "pages/Login/Login";
 import Main from "pages/Main/Main";
 import Recruitment from "pages/Recruitment/Recruitment";
+import RecruitmentDetail from "pages/Recruitment/RecruitmentDetail";
 import Faq from "pages/Faq/Faq";
 import CrewRecruit from "pages/CrewRecruit/CrewRecruit";
 import WishList from "pages/WishList/WishList";
@@ -20,6 +21,7 @@ const Router = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/user/signin/" element={<OAuth />} />
         <Route path="/recruitment" element={<Recruitment />} />
+        <Route path="/recruitmentdetail" element={<RecruitmentDetail />} />
         <Route path="/faq" element={<Faq />} />
         <Route path="/crewrecruit" element={<CrewRecruit />} />
         <Route path="/wishlist" element={<WishList />} />

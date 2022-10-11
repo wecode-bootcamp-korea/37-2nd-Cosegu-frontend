@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+const SearchField = (props) => <S.SearchField {...props} />;
+
 const S = {
   SearchField: styled.input`
     width: 500px;
@@ -15,7 +17,5 @@ const S = {
     }
   `,
 };
-
-const SearchField = (props) => <S.SearchField {...props} />;
 
 export default SearchField;
