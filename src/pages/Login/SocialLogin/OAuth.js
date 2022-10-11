@@ -8,7 +8,7 @@ const OAuth = () => {
   const code = new URL(window.location.href).searchParams.get("code");
 
   useEffect(() => {
-    fetch(`http://172.20.10.3:3000/user/signin?code=${code}`, {
+    fetch(`http://10.58.52.199:3000/user/signin?code=${code}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;",

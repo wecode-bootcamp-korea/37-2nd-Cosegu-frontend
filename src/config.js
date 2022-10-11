@@ -1,4 +1,4 @@
-const BASE_URL = "http://172.20.10.3:3000";
+const BASE_URL = "http://10.58.52.199:3000";
 
 export const API = {
   LOGIN: `${BASE_URL}`,
@@ -6,7 +6,7 @@ export const API = {
   FAQ: `${BASE_URL}`,
   CREWRECRUIT: `${BASE_URL}`,
   MAIN: `${BASE_URL}`,
-  MYPAGE: `${BASE_URL}`,
+  MYPAGE: `${BASE_URL}/mypage`,
   WISHLIST: `${BASE_URL}`,
   HEADER: `${BASE_URL}`,
 };

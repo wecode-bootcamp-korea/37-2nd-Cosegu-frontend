@@ -14,7 +14,7 @@ const Banner = () => {
 };
 
 const Container = styled.section`
-  ${(props) => props.theme.variables.flexSet()};
+  ${({ theme }) => theme.variables.flexSet()};
   width: 100%;
   height: 450px;
   background-color: ${theme.mainColor};
