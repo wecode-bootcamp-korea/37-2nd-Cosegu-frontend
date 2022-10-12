@@ -1,14 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import { AiOutlineHeart } from "react-icons/ai";
+import { API } from "config";
+import styled from "styled-components";
 import variables from "styles/variables";
+import theme from "styles/theme";
 
 const LikeIcon = () => {
+  const [likeCount, setLikeCount] = useState(0);
+
+  useEffect(() => {
+    fetch("/data/likelist.json")
+      .then((res) => res.json())
+      .then((res) => setLikeCount(res.likeList.length));
+  }, []);
+
+  // 백엔드 통신은 아래 코드로
+  // useEffect(() => {
+  //   fetch(`${API}/내용추가`, {
+  //     headers: {
+  //       authorization: localStorage.getItem("TOKEN"),
+  //       "Content-Type": "application/json;charset=utf-8",
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((res) => setLikeCount(res.likeList.length));
+  // }, []);
+
   return (
     <LinkIcon to="/wishlist">
       <AiOutlineHeart size="28px" className="icon" />
-      <LikeCount>3</LikeCount>
+      {Boolean(likeCount) && <LikeCount>{likeCount}</LikeCount>}
     </LinkIcon>
   );
 };
@@ -28,6 +50,6 @@ const LikeCount = styled.div`
   height: 20px;
   padding-top: 2px;
   color: white;
-  background: ${(props) => props.theme.mainColor};
+  background: ${theme.mainColor};
   border-radius: 50%;
 `;
