@@ -1,10 +1,16 @@
 import React from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import LoginInput from "./LoginInput";
 import LoginBtn from "./LoginBtn";
 import SocialLogin from "./SocialLogin/SocialLogin";
 
 const Login = () => {
+  // 임시 토큰 생성, 로그인 이후 고려
+  useEffect(() => {
+    window.localStorage.setItem("TOKEN", 20);
+  }, []);
+
   return (
     <S.LoginWrap>
       <S.LoginTitle>로그인</S.LoginTitle>
