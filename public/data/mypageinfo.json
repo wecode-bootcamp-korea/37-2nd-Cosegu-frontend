@@ -1,0 +1,70 @@
+{
+  "result": {
+    "info": [
+      {
+        "applymentId": 1,
+        "name": "신주안",
+        "email": "shinjuan0101@naver.com",
+        "birth": "1995-12-31T15:00:00.000Z",
+        "gender": "M",
+        "mobile": "010-2993-5911",
+        "recruitTitle": "S백화점 차세대 시스템 분석 및 개발",
+        "created_at": "2022-10-12T04:21:15.000Z"
+      },
+      {
+        "applymentId": 2,
+        "name": "신주안",
+        "email": "shinjuan0101@naver.com",
+        "birth": "1995-12-31T15:00:00.000Z",
+        "gender": "M",
+        "mobile": "010-2993-5911",
+        "recruitTitle": "IT컴퍼니 웹 개발자 채용",
+        "created_at": "2022-10-12T04:21:22.000Z"
+      }
+    ],
+    "question": [
+      {
+        "id": 1,
+        "title": "안녕하세요 ",
+        "content": "문의 사항이 있습니다 ",
+        "fileUrl": "https://cosegu.s3.ap-northeast-2.amazonaws.com/20221012171858_%E1%84%80%E1%85%A9%E1%86%B7%E1%84%83%E1%85%A9%E1%86%AF%E1%84%8B%E1%85%B5.jpeg"
+      },
+      {
+        "id": 2,
+        "title": "안녕하세요 ",
+        "content": "문의 사항이 있습니다 ",
+        "fileUrl": "https://cosegu.s3.ap-northeast-2.amazonaws.com/20221012175853_%E1%84%80%E1%85%A9%E1%86%B7%E1%84%83%E1%85%A9%E1%86%AF%E1%84%8B%E1%85%B5.jpeg"
+      },
+      {
+        "id": 3,
+        "title": "안녕하세요 .... 하...",
+        "content": "문의 사항이 있습니다 ",
+        "fileUrl": null
+      },
+      {
+        "id": 4,
+        "title": "안녕하세요 .... 하...ㅇㄴㄹㅁㄴㅇㄹㅁㄴㅇ",
+        "content": "문의 사항이 있습니다 ㅁㄴㅇㅇㄹㅁㅇㄹㄴㅁㅇㄹㄴㅁㅇㄹ",
+        "fileUrl": "https://cosegu.s3.ap-northeast-2.amazonaws.com/20221012180033_BaeKyuNam.PNG"
+      },
+      {
+        "id": 5,
+        "title": "기업협업 ",
+        "content": "\b랜덤이라며ㅡㅡㅡㅡ 살려줘 ㅡㅡㅡㅡㅡㅡ ",
+        "fileUrl": "https://cosegu.s3.ap-northeast-2.amazonaws.com/20221012195916_js.png"
+      },
+      {
+        "id": 6,
+        "title": "das",
+        "content": "1111",
+        "fileUrl": "https://cosegu.s3.ap-northeast-2.amazonaws.com/20221012212301_%C3%A1%C2%84%C2%86%C3%A1%C2%85%C2%A1%C3%A1%C2%86%C2%AF%C3%A1%C2%84%C2%91%C3%A1%C2%85%C2%AE%C3%A1%C2%86%C2%BC%C3%A1%C2%84%C2%89%C3%A1%C2%85%C2%A5%C3%A1%C2%86%C2%AB.png"
+      },
+      {
+        "id": 7,
+        "title": "기업협업 ",
+        "content": "kkkkk",
+        "fileUrl": null
+      }
+    ]
+  }
+}

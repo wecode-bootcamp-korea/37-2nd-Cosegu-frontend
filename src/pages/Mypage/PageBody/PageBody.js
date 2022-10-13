@@ -4,16 +4,16 @@ import PageBodyQna from "./PageBodyQna";
 import PageBodyApply from "./PageBodyApply/PageBodyApply";
 import styled from "styled-components";
 
-const PageBody = () => {
+const PageBody = ({ userInfoArr, userQueArr }) => {
   return (
     <>
       <S.ApplyWrap>
         <PageBodyTitle title="나의 지원현황" btnText="지원하기" />
-        <PageBodyApply />
+        <PageBodyApply userInfoArr={userInfoArr} />
       </S.ApplyWrap>
       <S.QnaWrap>
         <PageBodyTitle title="나의 문의 내역" btnText="1:1 문의" />
-        <PageBodyQna />
+        <PageBodyQna userQueArr={userQueArr} />
       </S.QnaWrap>
     </>
   );

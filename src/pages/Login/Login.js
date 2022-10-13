@@ -7,9 +7,6 @@ import SocialLogin from "./SocialLogin/SocialLogin";
 
 const Login = () => {
   // 임시 토큰 생성, 로그인 이후 고려
-  useEffect(() => {
-    window.localStorage.setItem("TOKEN", 20);
-  }, []);
 
   return (
     <S.LoginWrap>

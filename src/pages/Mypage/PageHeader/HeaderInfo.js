@@ -2,22 +2,28 @@ import React from "react";
 import styled from "styled-components";
 import variables from "styles/variables";
 
-const HeaderInfo = () => {
+const HeaderInfo = ({ userInfoArr }) => {
   return (
     <S.InfoWrap>
       <S.List>
         <S.Title>이메일</S.Title>
-        <S.Info>skdyds@naver.com</S.Info>
+        <S.Info>
+          {userInfoArr !== undefined && `${userInfoArr[0].email}`}
+        </S.Info>
       </S.List>
       <S.Line />
       <S.List>
         <S.Title>생년월일</S.Title>
-        <S.Info>2022년 2월 22일</S.Info>
+        <S.Info>
+          {userInfoArr !== undefined && `${userInfoArr[0].birth}`}
+        </S.Info>
       </S.List>
       <S.Line />
       <S.List>
         <S.Title>휴대폰 번호</S.Title>
-        <S.Info>010-3444-3333</S.Info>
+        <S.Info>
+          {userInfoArr !== undefined && `${userInfoArr[0].mobile}`}
+        </S.Info>
       </S.List>
     </S.InfoWrap>
   );
