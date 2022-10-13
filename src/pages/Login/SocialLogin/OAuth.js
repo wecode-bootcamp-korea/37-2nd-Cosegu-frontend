@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { API } from "config";
 import styled from "styled-components";
 import variables from "styles/variables";
 
@@ -8,7 +9,7 @@ const OAuth = () => {
   const code = new URL(window.location.href).searchParams.get("code");
 
   useEffect(() => {
-    fetch(`http://10.58.52.199:3000/user/signin?code=${code}`, {
+    fetch(`${API.LOGIN}?code=${code}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;",
@@ -20,8 +21,8 @@ const OAuth = () => {
       })
       .catch((error) => alert(error))
       .then((data) => {
-        if (data.result) {
-          localStorage.setItem("TOKEN", data.result);
+        if (data.token) {
+          localStorage.setItem("TOKEN", data.token);
           alert("로그인 성공");
           navigate("/");
           window.location.reload();
