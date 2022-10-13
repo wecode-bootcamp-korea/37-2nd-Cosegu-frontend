@@ -3,18 +3,22 @@ import { Map, MapMarker } from "react-kakao-maps-sdk";
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 import styled from "styled-components";
 import theme from "styles/theme";
+import { useNavigate } from "react-router-dom";
 
 const JobOpening = ({ recruit }) => {
-  const { id, location, title, link, qualification, mainBusiness } = recruit;
+  const { recruitId, location, title, link, categoryName } = recruit;
   const [isOpen, setIsOpen] = useState(false);
-
+  const navigate = useNavigate();
   const openContent = () => {
     setIsOpen(!isOpen);
   };
 
+  const handleSubmit = () => {
+    navigate(`/rectform`, { state: { recruitId: recruitId } });
+  };
   return (
     <S.Container
-      key={id}
+      key={recruitId}
       isOpen={isOpen}
       active={{
         boxShadow: "0px 0px 10px -3px black;",
@@ -24,12 +28,11 @@ const JobOpening = ({ recruit }) => {
     >
       <S.CrewRecruitBtn onClick={openContent}>
         <S.Qualification isOpen={isOpen} active={{ fontWeight: "800" }}>
-          {mainBusiness}
+          {categoryName}
         </S.Qualification>
-        <S.Title
-          isOpen={isOpen}
-          active={{ fontWeight: "800" }}
-        >{`${title}(${qualification})`}</S.Title>
+        <S.Title isOpen={isOpen} active={{ fontWeight: "800" }}>
+          {title}
+        </S.Title>
         <S.OpenBtn>{isOpen ? <AiOutlineUp /> : <AiOutlineDown />}</S.OpenBtn>
       </S.CrewRecruitBtn>
       <S.Content>
@@ -58,7 +61,7 @@ const JobOpening = ({ recruit }) => {
               <S.SideMapInfoTitle>{location}</S.SideMapInfoTitle>
               <S.SideMapInfoLink>{link}</S.SideMapInfoLink>
             </S.SideMapInfo>
-            <S.RecruitBtn>지원하기</S.RecruitBtn>
+            <S.RecruitBtn onClick={handleSubmit}>지원하기</S.RecruitBtn>
           </S.Side>
         </S.Detail>
       </S.Content>
@@ -94,8 +97,9 @@ const S = {
   `,
 
   Qualification: styled.span`
-    width: 10%;
+    width: 15%;
     padding: 0 30px;
+    font-weight: ${(props) => props.isOpen && props.active.fontWeight};
   `,
 
   Title: styled.span`
