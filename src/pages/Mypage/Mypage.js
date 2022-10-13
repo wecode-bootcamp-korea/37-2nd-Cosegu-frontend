@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import PageBody from "./PageBody/PageBody";
 import PageHeader from "./PageHeader/PageHeader";
+import { API } from "config";
 
 const Mypage = () => {
   const [userInfo, setUserInfo] = useState([]);
 
-  console.log(localStorage.getItem("TOKEN"));
-
   useEffect(() => {
-    fetch("http://10.58.52.193:3000/mypage", {
+    fetch(`${API.MYPAGE}`, {
       headers: {
         authorization: localStorage.getItem("TOKEN"),
         "Content-Type": "application/json;charset=utf-8",
