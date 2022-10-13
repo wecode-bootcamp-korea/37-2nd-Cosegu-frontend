@@ -1,7 +1,7 @@
 const BASE_URL = "http://10.58.52.199:3000";
 
 export const API = {
-  LOGIN: `${BASE_URL}`,
+  LOGIN: `${BASE_URL}/user/signin`,
   RECRUITMENT: `${BASE_URL}`,
   FAQ: `${BASE_URL}`,
   CREWRECRUIT: `${BASE_URL}`,
