@@ -11,6 +11,7 @@ import Mypage from "pages/Mypage/Mypage";
 import Header from "components/Header/Header";
 import Footer from "components/Footer/Footer";
 import OAuth from "pages/Login/SocialLogin/OAuth";
+import Recform from "components/RecForm/RecForm";
 
 const Router = () => {
   return (
@@ -21,11 +22,12 @@ const Router = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/user/signin/" element={<OAuth />} />
         <Route path="/recruitment" element={<Recruitment />} />
-        <Route path="/recruitmentdetail" element={<RecruitmentDetail />} />
+        <Route path="/recruitmentdetail/:id" element={<RecruitmentDetail />} />
         <Route path="/faq" element={<Faq />} />
         <Route path="/crewrecruit" element={<CrewRecruit />} />
         <Route path="/wishlist" element={<WishList />} />
         <Route path="/mypage" element={<Mypage />} />
+        <Route path="/recform" element={<Recform />} />
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -1,68 +1,68 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { API } from "config";
 
-const DetailRightItem = ({ detailForRight, handleLikeClick }) => {
-  const { career, title, employment } = detailForRight;
+const DetailRightItem = ({
+  recruit,
+  handleLikeClick,
+  handleRecruit,
+  isBtnType,
+}) => {
+  const {
+    division,
+    title,
+    region,
+    employmentType,
+    mainBusiness,
+    qualification,
+    preferentialTreatment,
+  } = recruit[0];
 
   return (
     <>
-      <S.CareerFlag>{career}</S.CareerFlag>
+      <S.CareerFlag>{division}</S.CareerFlag>
       <S.TopTitle>{title}</S.TopTitle>
-      <S.FlagType>{employment} | 영업 종료시</S.FlagType>
+      <S.FlagType>{employmentType} | 영업 종료시</S.FlagType>
       <S.DetailView>
         <S.Ol>
-          <S.Li>구분 : {career}</S.Li>
-          <S.Li>모집지역 :</S.Li>
-          <S.Li>고용형태 : {employment}&#40;수습기간 3개월&#41;</S.Li>
+          <S.Li>구분 : {division}</S.Li>
+          <S.Li>모집지역 {region}:</S.Li>
+          <S.Li>고용형태 : {employmentType}&#40;수습기간 3개월&#41;</S.Li>
         </S.Ol>
         <S.Ol>
           <S.Li>
             <S.SmTitle>&#91;주요업무&#93;</S.SmTitle>
           </S.Li>
-          <S.Li>- 대외 커뮤니케이션 및 홍보를 위한 전략 수립, 실행</S.Li>
-          <S.Li>- 내부 조직과 대외기관의 협업 조율</S.Li>
-          <S.Li>- 언론 매체 및 정부 기관과의 커뮤니케이션</S.Li>
-          <S.Li>- 대내외 이슈 및 리스크 관리, 대응 전략 수립 및 실행</S.Li>
-          <S.Li>- 서비스 관련 규제 및 법적 요인 개선 활동</S.Li>
+          <S.Li>{mainBusiness}</S.Li>
         </S.Ol>
         <S.Ol>
           <S.Li>
             <S.SmTitle>&#91;지원자격&#93;</S.SmTitle>
           </S.Li>
-          <S.Li>- 3년 이상의 홍보, 대외협력 등 유관 업무 경력이 있으신 분</S.Li>
-          <S.Li>- 유연한 사고와 원활한 커뮤니케이션 역량을 갖추신 분</S.Li>
-          <S.Li>
-            - 문제해결 역량을 기반으로 위기관리 및 이슈 대응 경험이 있으신 분
-          </S.Li>
-          <S.Li>
-            - 보도자료 작성, 데이터 및 사실관계 분석을 통한 의견 작성 등 문서
-            작업에 능하신 분
-          </S.Li>
+          <S.Li>{preferentialTreatment}</S.Li>
         </S.Ol>
         <S.Ol>
           <S.Li>
             <S.SmTitle>&#91;우대사항&#93;</S.SmTitle>
           </S.Li>
-          <S.Li>- 업무상 언론/정부기관 등 기관 커뮤니케이션에 익숙하신 분</S.Li>
-          <S.Li>- 이슈에 대한 정무적 판단 능력이 우수하신 분</S.Li>
-          <S.Li>- 협업을 통해 시너지를 낼 수 있는 분</S.Li>
-          <S.Li>
-            - 코세구의 기업문화를 이해하고, 업무에 잘 녹여낼 수 있는 분
-          </S.Li>
-          <S.Li>
-            - 배달 플랫폼, 물류/유통, IT 등 유관 업종에 대한 경험과 이해가
-            있으신 분
-          </S.Li>
+          <S.Li>{qualification}</S.Li>
         </S.Ol>
       </S.DetailView>
       <S.LikeBtn
         onClick={handleLikeClick}
-        bgHeart="./images/detail/heart_on.png"
+        bgHeart={`${
+          isBtnType === true
+            ? "./images/Detail/heart_on.png"
+            : "./images/Detail/heart_off.png"
+        }`}
       >
         하트
       </S.LikeBtn>
       <S.BtnWrap>
-        <S.Button type="button">지원하기</S.Button>
+        <S.Button type="button" onClick={handleRecruit}>
+          지원하기
+        </S.Button>
       </S.BtnWrap>
     </>
   );

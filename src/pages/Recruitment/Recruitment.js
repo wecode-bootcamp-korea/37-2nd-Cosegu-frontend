@@ -1,20 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Search from "components/Search/Search";
 import CategoryTab from "./CategoryTab";
 import LeftFilter from "./LeftFilter";
 import Recruit from "./Recruit";
+import { API } from "../../config";
 
 const Recruitment = () => {
+  const [recruit, setRecruit] = useState([]);
+  const [categoryId, setCategoryId] = useState(1);
+  const [skillList, setSkillList] = useState([]);
+
+  console.log(categoryId);
+
+  useEffect(() => {
+    fetch(`${API.RECRUITMENT}?categoryId=${categoryId}&limit=20&offset=0`, {
+      method: "GET",
+      headers: {
+        authorization:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjY1NTQ4MTQxLCJleHAiOjE2NjYzMjU3NDF9.9IJlPFXBHyLhvPlgi2tqMiYT-b9UXKm2Ep3GZwb-T8c",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setRecruit(data.recruits);
+        //console.log(data.recruits[0].tagName);
+      });
+  }, [categoryId, skillList]);
+
   return (
     <>
       <Search />
-      <CategoryTab />
+      <CategoryTab setCategoryId={setCategoryId} />
       <S.Content>
         <S.Wrap>
-          <LeftFilter />
+          <LeftFilter recruit={recruit} setSkillList={setSkillList} />
           <S.RecruitList>
-            <Recruit />
+            <Recruit recruit={recruit} />
           </S.RecruitList>
         </S.Wrap>
       </S.Content>

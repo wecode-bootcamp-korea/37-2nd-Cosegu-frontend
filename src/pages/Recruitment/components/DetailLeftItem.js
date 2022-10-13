@@ -1,18 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
-const DetailItem = ({ item, count, setCount, handleLikeClick }) => {
+const DetailItem = ({ recruit, id, handleLikeClick, isBtnType }) => {
+  const [count, setCount] = useState("1");
+
+  const { title } = recruit[0];
+
+  // if (Object.keys(recruit).length === 0) return <>loading...</>;
+
   return (
     <S.DetailListBox
       onClick={() => {
-        setCount(item.id);
+        setCount(id);
       }}
-      bdColor={count === item.id ? "#BF1010" : "#e5e5e5"}
+      bdColor={count === id ? "#BF1010" : "#e5e5e5"}
     >
-      <S.DetilListTitle>{item.title}</S.DetilListTitle>
+      <S.DetilListTitle>{title}</S.DetilListTitle>
       <S.LikeBtn
         onClick={handleLikeClick}
-        bgHeart="./images/detail/heart_on.png"
+        bgHeart={`${
+          isBtnType === true
+            ? "./images/Detail/heart_on.png"
+            : "./images/Detail/heart_off.png"
+        }`}
       >
         하트
       </S.LikeBtn>
@@ -25,6 +35,7 @@ const LikeBtn = styled.button`
   width: 25px;
   height: 25px;
   background: url(${(props) => props.bgHeart}) 50% 50% no-repeat;
+
   background-size: cover;
   background-color: transparent;
   border: 0;
@@ -43,7 +54,7 @@ const S = {
     background-color: #fff;
     border: 1px solid ${(props) => props.bdColor};
     margin-bottom: 20px;
-    cursor: pointer;
+    /* cursor: pointer; */
   `,
 
   DetilListTitle: styled.h2`

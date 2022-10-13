@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from "react";
 
-const Skill = ({ S }) => {
-  const [skill, setSkill] = useState([]);
+const SKILL_LIST = [
+  { id: 1, title: "React" },
+  { id: 2, title: "Vue" },
+  { id: 3, title: "Typescript" },
+  { id: 4, title: "Next.js" },
+  { id: 5, title: "python" },
+];
 
-  useEffect(() => {
-    fetch("/data/rec/skill.json")
-      .then((res) => res.json())
-      .then((data) => setSkill(data));
-  }, []);
+const Skill = ({ S, setSkillList }) => {
+  const onClick = (id) => {
+    setSkillList(id);
+  };
 
   return (
     <>
-      {skill.map((item) => {
+      {SKILL_LIST.map((item) => {
         return (
           <S.CheckChoice key={item.id}>
-            <S.SkillInput type="checkbox" id={item.id} />
-            <S.SkillLabel htmlFor={item.id}>{item.skill}</S.SkillLabel>
+            <S.SkillInput type="checkbox" id={item.id} value={item.title} />
+            <S.SkillLabel htmlFor={item.id} onClick={() => onClick(item.id)}>
+              {item.title}
+            </S.SkillLabel>
           </S.CheckChoice>
         );
       })}

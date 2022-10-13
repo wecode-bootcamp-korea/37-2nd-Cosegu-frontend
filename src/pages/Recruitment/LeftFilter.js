@@ -2,14 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import Skill from "./Skill";
 
-const LeftFilter = () => {
+const LeftFilter = ({ setSkillList }) => {
   return (
     <S.FilterCont>
       <S.FilterWrap>
         <S.Title>스킬</S.Title>
         <S.FilterCoice>
           <S.CheckboxForm>
-            <Skill S={S} />
+            <Skill S={S} setSkillList={setSkillList} />
           </S.CheckboxForm>
         </S.FilterCoice>
         <S.Title>경력</S.Title>
@@ -63,11 +63,10 @@ const S = {
     padding-bottom: 25px;
     border-bottom: 1px solid #e5e5e5;
   `,
-  CheckboxForm: styled.ul`
-    display: flex;
-  `,
+  CheckboxForm: styled.ul``,
   CheckChoice: styled.li`
-    margin: 0 8px 8px 0;
+    display: inline-block;
+    margin: 0 3px 3px 0;
   `,
   SkillInput: styled.input`
     ${(props) => props.theme.style.hide};
@@ -80,12 +79,13 @@ const S = {
     }
   `,
   SkillLabel: styled.label`
+    display: block;
     min-width: 45px;
-    height: 35px;
+    height: 30px;
     padding: 5px 10px;
     font-size: 13px;
     font-weight: 400;
-    line-height: 1.3em;
+    line-height: 1.4em;
     background-color: #fff;
     border: 1px solid #ebebeb;
     cursor: pointer;

@@ -1,36 +1,49 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import RecItem from "./components/RecItem";
+import { API } from "config";
 
-const Recruit = () => {
-  const [recruit, setRecruit] = useState([]);
+const Recruit = ({ recruit }) => {
   const [isBtnType, setIsBtnType] = useState({
     isListType: false,
     isTileType: false,
   });
 
-  // useEffect(() => {
-  //   fetch("http://127.0.0.1:3000/recruit?categoryId=6&limit=20&offset=0")
-  //     .then((res) => res.json())
-  //     .then((data) => setRecruit(data));
-  // }, []);
+  const { id } = useParams();
 
-  // useEffect(() => {
-  //   // fetch('/data/all2.json')
-  //   // fetch(`https://reqres.in/api/users/${userId}`)
-  //   // fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
-  //   fetch(`http://10.58.52.67:3000/products/showproduct/${userId}`, {
-  //     method: "GET",
-  //     headers: {
-  //       authorization:
-  //         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJpYXQiOjE2NjQwMDk3ODR9.nvQGE9HLe8n-JCgqqRk3O-2dGEujzQhWIgm0WyCKN60",
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setPrdData(data.message);
-  //     });
-  // }, []);
+  console.log("gg", id);
+
+  const handleLikeClick = (e) => {
+    e.preventDefault();
+
+    fetch(`${API.LIKES}`, {
+      method: "POST",
+      headers: {
+        authorization:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjY1NTQ4MTQxLCJleHAiOjE2NjYzMjU3NDF9.9IJlPFXBHyLhvPlgi2tqMiYT-b9UXKm2Ep3GZwb-T8c",
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify({
+        recruitId: id,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+
+        if (data.message === "INVALID_LIKES") {
+          // localStorage.setItem(data.userName, data.accessToken);
+          // navigate("/main-Rubi");
+          // alert("로그인 성공");
+          setIsBtnType(false);
+          alert("실패");
+        }
+        //  else if (data.message === "INVALID_LIKES") {
+        //   alert("로그인 실패");
+        // }
+      });
+  };
 
   return (
     <S.RecruitCont>
@@ -59,7 +72,14 @@ const Recruit = () => {
       <S.RecListCont>
         <S.RecList isBtn={isBtnType}>
           {recruit.map((rec) => {
-            return <RecItem key={rec.id} rec={rec} isBtnType={isBtnType} />;
+            return (
+              <RecItem
+                key={rec.id}
+                rec={rec}
+                isBtnType={isBtnType}
+                handleLikeClick={handleLikeClick}
+              />
+            );
           })}
         </S.RecList>
       </S.RecListCont>

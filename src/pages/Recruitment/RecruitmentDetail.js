@@ -1,33 +1,91 @@
 import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Search from "components/Search/Search";
 import CategoryTab from "./CategoryTab";
 import DetailLeftItem from "./components/DetailLeftItem";
 import DetailRightItem from "./components/DetailRightItem";
+import { API } from "config";
 
 const RecruitmentDetail = () => {
-  const [detail, setDetail] = useState([]);
-  const [count, setCount] = useState(1);
-  const [detailForRight, setDetailForRight] = useState([]);
+  // const [detail, setDetail] = useState([]);
+
+  // const [detailForRight, setDetailForRight] = useState([]);
+
+  // useEffect(() => {
+  //   fetch("/data/detail.json")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setDetail(data);
+  //     });
+  // }, []);
+
+  // useEffect(() => {
+  //   detail.forEach((detail) => {
+  //     if (detail.id === count) {
+  //       const detailForCopy = { ...detail };
+  //       setDetailForRight(detailForCopy);
+  //     }
+  //   });
+  // }, [detail, count]);
+  const [isBtnType, setIsBtnType] = useState({
+    isListType: false,
+    isTileType: false,
+  });
+  const [recruit, setRecruit] = useState([{}]);
+
+  const { id } = useParams();
+
+  const navigate = useNavigate();
+
+  const handleRecruit = () => {
+    navigate("/recform", { state: { recruitId: id } });
+  };
 
   useEffect(() => {
-    fetch("/data/detail.json")
+    fetch(`${API.RECRUITMENT}/${id}`, {
+      method: "GET",
+      headers: {
+        authorization:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjY1NTQ4MTQxLCJleHAiOjE2NjYzMjU3NDF9.9IJlPFXBHyLhvPlgi2tqMiYT-b9UXKm2Ep3GZwb-T8c",
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
-        setDetail(data);
+        setRecruit(data.recruitDetail);
       });
   }, []);
 
-  useEffect(() => {
-    detail.map((detail) => {
-      if (detail.id === count) {
-        const detailForCopy = { ...detail };
-        setDetailForRight(detailForCopy);
-      }
-    });
-  }, [detail, count]);
+  const handleLikeClick = (e) => {
+    e.preventDefault();
 
-  if (Object.keys(detail).length === 0) return <>loading...</>;
+    fetch(`${API.LIKES}`, {
+      method: "POST",
+      headers: {
+        authorization:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjY1NTQ4MTQxLCJleHAiOjE2NjYzMjU3NDF9.9IJlPFXBHyLhvPlgi2tqMiYT-b9UXKm2Ep3GZwb-T8c",
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify({
+        recruitId: id,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+
+        if (data.message === "INVALID_LIKES") {
+          // localStorage.setItem(data.userName, data.accessToken);
+          // navigate("/main-Rubi");
+          // alert("로그인 성공");
+          setIsBtnType(false);
+          alert("실패");
+        }
+        //  else if (data.message === "INVALID_LIKES") {
+        //   alert("로그인 실패");
+        // }
+      });
+  };
 
   return (
     <>
@@ -37,26 +95,27 @@ const RecruitmentDetail = () => {
         <S.Contain>
           <S.LeftMenu>
             <S.LeftMenuWrap>
-              <S.PageBack>
+              {/* <S.PageBack>
                 <S.BackBtn href="#">뒤로가기</S.BackBtn>
-              </S.PageBack>
+              </S.PageBack> */}
               <S.DetailListWrap>
-                {detail.map((item) => {
-                  return (
-                    <DetailLeftItem
-                      key={item.id}
-                      item={item}
-                      count={count}
-                      setCount={setCount}
-                    />
-                  );
-                })}
+                <DetailLeftItem
+                  recruit={recruit}
+                  id={id}
+                  handleLikeClick={handleLikeClick}
+                  isBtnType={isBtnType}
+                />
               </S.DetailListWrap>
             </S.LeftMenuWrap>
           </S.LeftMenu>
           <S.DetailWrap>
             <S.DetailCont>
-              <DetailRightItem detailForRight={detailForRight} />
+              <DetailRightItem
+                recruit={recruit}
+                handleLikeClick={handleLikeClick}
+                handleRecruit={handleRecruit}
+                isBtnType={isBtnType}
+              />
             </S.DetailCont>
           </S.DetailWrap>
         </S.Contain>

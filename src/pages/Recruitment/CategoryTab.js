@@ -1,23 +1,35 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const TAB_CATEGORIES = ["프론트엔드", "백엔드", "풀스택", "웹디자인", "QA"];
+const TAB_CATEGORIES = [
+  { id: 1, title: "프론트엔드" },
+  { id: 2, title: "백엔드" },
+  { id: 3, title: "풀스택" },
+  { id: 4, title: "웹디자이너" },
+  { id: 5, title: "QA" },
+];
 
-function CategoryTab() {
+function CategoryTab({ setCategoryId }) {
   const [currTab, setCurrentTab] = useState("프론트엔드");
+
+  const onClick = (id, title) => {
+    setCurrentTab(title);
+    setCategoryId(id);
+  };
 
   return (
     <S.Categories>
-      {TAB_CATEGORIES.map((tab) => (
-        <S.CateTab key={tab}>
+      {TAB_CATEGORIES.map((data) => (
+        <S.CateTab key={data.id}>
           <S.TabLink
-            // href="/recruitment"
-            onClick={() => setCurrentTab(tab)}
-            textColor={`${currTab === tab ? "#BF1010" : "#000"}`}
+            onClick={() => onClick(data.id, data.title)}
+            textColor={`${currTab === data.title ? "#BF1010" : "#000"}`}
           >
-            {tab}
+            {data.title}
+            <S.Num bgColor={`${currTab === data.title ? "#BF1010" : "#000"}`}>
+              10
+            </S.Num>
           </S.TabLink>
-          <S.Num bgColor={`${currTab === tab ? "#BF1010" : "#000"}`}>10</S.Num>
         </S.CateTab>
       ))}
     </S.Categories>

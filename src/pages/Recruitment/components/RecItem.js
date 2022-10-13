@@ -1,29 +1,24 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-function RecItem({ rec, isBtnType }) {
-  const [isLike, setIsLike] = useState(false);
-
-  const handleLikeClick = () => {
-    setIsLike((prev) => !prev);
-  };
-
+function RecItem({ rec, isBtnType, handleLikeClick }) {
   return (
     <S.RecGroup key={rec.recruitId} isBtn={isBtnType}>
-      <S.RecLink href={rec.link}>
+      <S.RecLink to={`/recruitmentdetail/${rec.recruitId}`}>
         <S.RecTop isBtn={isBtnType}>
-          <S.CareerFlag isBtn={isBtnType}>{rec.career}</S.CareerFlag>
+          <S.CareerFlag isBtn={isBtnType}>{rec.division}</S.CareerFlag>
           <S.Title>{rec.title}</S.Title>
         </S.RecTop>
         <S.FlagType isBtn={isBtnType}>
-          {rec.employment} | 영업 종료시
+          {rec.employmentType} | 영업 종료시
         </S.FlagType>
       </S.RecLink>
       <S.RecLike>
         <S.heart
           onClick={handleLikeClick}
           bgHeart={`${
-            isLike === true
+            isBtnType === true
               ? "./images/rec/heart_on.png"
               : "./images/rec/heart_off.png"
           }`}
@@ -43,7 +38,7 @@ const S = {
     position: relative;
     margin-top: 10px;
   `,
-  RecLink: styled.a`
+  RecLink: styled(Link)`
     display: block;
     height: 100%;
     padding: 35px 25px;
