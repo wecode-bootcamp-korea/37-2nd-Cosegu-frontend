@@ -10,22 +10,16 @@ const LikeIcon = () => {
   const [likeCount, setLikeCount] = useState(0);
 
   useEffect(() => {
-    fetch("/data/likelist.json")
+    fetch(`${API.HEADER}/likes`, {
+      method: "GET",
+      headers: {
+        authorization: localStorage.getItem("TOKEN"),
+        "Content-Type": "application/json;charset=utf-8",
+      },
+    })
       .then((res) => res.json())
       .then((res) => setLikeCount(res.likeList.length));
   }, []);
-
-  // 백엔드 통신은 아래 코드로
-  // useEffect(() => {
-  //   fetch(`${API}/내용추가`, {
-  //     headers: {
-  //       authorization: localStorage.getItem("TOKEN"),
-  //       "Content-Type": "application/json;charset=utf-8",
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((res) => setLikeCount(res.likeList.length));
-  // }, []);
 
   return (
     <LinkIcon to="/wishlist">

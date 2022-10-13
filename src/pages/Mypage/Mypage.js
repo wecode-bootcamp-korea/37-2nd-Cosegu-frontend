@@ -6,8 +6,6 @@ import PageHeader from "./PageHeader/PageHeader";
 const Mypage = () => {
   const [userInfo, setUserInfo] = useState([]);
 
-  console.log(localStorage.getItem("TOKEN"));
-
   useEffect(() => {
     fetch("http://10.58.52.193:3000/mypage", {
       headers: {
