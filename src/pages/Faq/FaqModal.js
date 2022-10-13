@@ -17,19 +17,16 @@ const FaqModal = ({ handleModal, userInfo }) => {
   const formData = new FormData();
 
   const getToken = localStorage.getItem("TOKEN");
-  const { title, content, email, phoneNumber, check } = inputValue;
+  const { title, content, check } = inputValue;
 
-  const validate =
-    title === "" ||
-    content === "" ||
-    email === "" ||
-    phoneNumber === "" ||
-    check === false;
+  const validate = title === "" || content === "" || check === false;
 
   const handleForm = (e) => {
     const { name, value } = e.target;
     setInputValue((prev) => ({ ...prev, [name]: value }));
   };
+
+  console.log(validate);
 
   // const handlePhone = (e) => {
   //   let phone = e.target.value;
@@ -168,10 +165,7 @@ const FaqModal = ({ handleModal, userInfo }) => {
             </S.AgreeContainer>
           </S.Form>
           <S.BtnWrap>
-            <S.SubmitBtn
-              onClick={handleSubmit}
-              // disabled={validate}
-            >
+            <S.SubmitBtn onClick={handleSubmit} disabled={validate}>
               등록하기
             </S.SubmitBtn>
           </S.BtnWrap>

@@ -26,6 +26,7 @@ const Router = () => {
         <Route path="/crewrecruit" element={<CrewRecruit />} />
         <Route path="/wishlist" element={<WishList />} />
         <Route path="/mypage" element={<Mypage />} />
+        {/* <Route path="/rectform" element={<Rectform />} /> */}
       </Routes>
       <Footer />
     </BrowserRouter>
