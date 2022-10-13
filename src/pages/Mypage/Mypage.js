@@ -1,19 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import PageBody from "./PageBody/PageBody";
 import PageHeader from "./PageHeader/PageHeader";
 
 const Mypage = () => {
+  const [userInfo, setUserInfo] = useState([]);
+
+  console.log(localStorage.getItem("TOKEN"));
+
+  useEffect(() => {
+    fetch("http://10.58.52.193:3000/mypage", {
+      headers: {
+        authorization: localStorage.getItem("TOKEN"),
+        "Content-Type": "application/json;charset=utf-8",
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => setUserInfo(res.result));
+  }, []);
+
   return (
     <>
       <S.MypageHeaderWrap>
         <S.MypageHeader>
-          <PageHeader />
+          <PageHeader userInfoArr={userInfo.info} />
         </S.MypageHeader>
       </S.MypageHeaderWrap>
       <S.MypageBodyWrap>
         <S.MypageBody>
-          <PageBody />
+          <PageBody
+            userInfoArr={userInfo.info}
+            userQueArr={userInfo.question}
+          />
         </S.MypageBody>
       </S.MypageBodyWrap>
     </>

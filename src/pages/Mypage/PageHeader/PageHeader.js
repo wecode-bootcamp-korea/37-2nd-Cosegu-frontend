@@ -3,16 +3,19 @@ import HeaderInfo from "./HeaderInfo";
 import styled from "styled-components";
 import variables from "styles/variables";
 
-const PageHeader = () => {
+const PageHeader = ({ userInfoArr }) => {
   return (
     <>
       <S.HeaderName>
         <p>
-          <S.Name>코세구</S.Name>님
+          <S.Name>
+            {userInfoArr !== undefined && `${userInfoArr[0].name}`}
+          </S.Name>
+          님
         </p>
         <S.Line />
       </S.HeaderName>
-      <HeaderInfo />
+      <HeaderInfo userInfoArr={userInfoArr} />
     </>
   );
 };

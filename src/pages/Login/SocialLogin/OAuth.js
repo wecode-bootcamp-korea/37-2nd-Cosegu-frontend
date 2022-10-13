@@ -19,7 +19,7 @@ const OAuth = () => {
         if (response.ok) return response.json();
         throw new Error("에러 발생!");
       })
-      .catch((error) => alert(error))
+      .catch((error) => alert("dsadsfa"))
       .then((data) => {
         if (data.token) {
           localStorage.setItem("TOKEN", data.token);

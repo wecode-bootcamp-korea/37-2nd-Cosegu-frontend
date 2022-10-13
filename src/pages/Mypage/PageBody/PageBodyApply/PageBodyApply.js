@@ -6,7 +6,7 @@ import { BiEditAlt } from "react-icons/bi";
 import { BiTrash } from "react-icons/bi";
 import { AiOutlineFileSearch } from "react-icons/ai";
 
-const PageBodyApply = () => {
+const PageBodyApply = ({ userInfoArr }) => {
   const [isModal, setIsModal] = useState(false);
 
   const applyView = (e) => {
@@ -15,40 +15,28 @@ const PageBodyApply = () => {
 
   return (
     <ul>
-      <S.ListItem>
-        <S.ListItemLeft>
-          <S.LeftTag>임시저장</S.LeftTag>
-          <S.LeftTitle>B마트 지점운영 Captain 모집(신입/경력)</S.LeftTitle>
-          <S.LeftTime>작성일 2022.10.06</S.LeftTime>
-        </S.ListItemLeft>
-        <S.ListItemRight>
-          <AiOutlineFileSearch
-            onClick={applyView}
-            size="24px"
-            className="icon"
-          />
-          <BiEditAlt size="24px" className="icon" />
-          <BiTrash size="24px" className="icon" />
-        </S.ListItemRight>
-        {isModal && <ModalApply applyView={applyView} />}
-      </S.ListItem>
-      <S.ListItem>
-        <S.ListItemLeft>
-          <S.LeftTag>임시저장</S.LeftTag>
-          <S.LeftTitle>B마트 지점운영 Captain 모집(신입/경력)</S.LeftTitle>
-          <S.LeftTime>작성일 2022.10.06</S.LeftTime>
-        </S.ListItemLeft>
-        <S.ListItemRight>
-          <AiOutlineFileSearch
-            onClick={applyView}
-            size="24px"
-            className="icon"
-          />
-          <BiEditAlt size="24px" className="icon" />
-          <BiTrash size="24px" className="icon" />
-        </S.ListItemRight>
-        {isModal && <ModalApply applyView={applyView} />}
-      </S.ListItem>
+      {userInfoArr !== undefined &&
+        userInfoArr.map((info) => {
+          return (
+            <S.ListItem key={info.applymentId}>
+              <S.ListItemLeft>
+                <S.LeftTag>임시저장</S.LeftTag>
+                <S.LeftTitle>{info.recruitTitle}</S.LeftTitle>
+                <S.LeftTime>작성일 {info.created_at}</S.LeftTime>
+              </S.ListItemLeft>
+              <S.ListItemRight>
+                <AiOutlineFileSearch
+                  onClick={applyView}
+                  size="24px"
+                  className="icon"
+                />
+                <BiEditAlt size="24px" className="icon" />
+                <BiTrash size="24px" className="icon" />
+              </S.ListItemRight>
+              {isModal && <ModalApply applyView={applyView} />}
+            </S.ListItem>
+          );
+        })}
     </ul>
   );
 };

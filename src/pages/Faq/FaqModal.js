@@ -168,7 +168,10 @@ const FaqModal = ({ handleModal, userInfo }) => {
             </S.AgreeContainer>
           </S.Form>
           <S.BtnWrap>
-            <S.SubmitBtn onClick={handleSubmit} disabled={validate}>
+            <S.SubmitBtn
+              onClick={handleSubmit}
+              // disabled={validate}
+            >
               등록하기
             </S.SubmitBtn>
           </S.BtnWrap>
