@@ -1,7 +1,3 @@
-
-![코세구 로고](https://user-images.githubusercontent.com/95614185/195778864-ec862545-1ddc-4682-aabe-3f471ed8118f.png)
-
-
 ## 코세구 - 코딩이 세상을 구한다 **프로젝트 Front-end/Back-end 소개**
 
 - 개발자들을 위한 채용 사이트
