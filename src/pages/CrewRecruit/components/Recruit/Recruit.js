@@ -1,75 +1,122 @@
 import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import theme from "styles/theme";
-import CrewRecruits from "./CrewRecruits";
-const Recruit = () => {
-  const [recruitData, setRecruitData] = useState([{}]);
+import JobOpening from "./JobOpening";
+import { API } from "config";
+const Recruit = ({ recruit }) => {
+  const [recruitData, setRecruitData] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const categoryId = searchParams.getAll("categoryId");
+
+  const makeURL = categoryId?.map((url) => `categoryId=${url}`);
+  const makeParams =
+    categoryId.length === 0
+      ? "?limit=20&offset=0"
+      : `?${makeURL.join("&")}&limit=20&offset=0`;
 
   useEffect(() => {
-    fetch("data/recruit.json")
+    fetch(`${API.CREWRECRUIT}${makeParams}`)
       .then((res) => res.json())
-      .then((data) => setRecruitData(data));
-  }, []);
+      .then((data) => setRecruitData(data.recruits));
+  }, [makeParams]);
 
+  const handleParams = (category) => {
+    if (categoryId.includes(category.toString())) {
+      const filterParams = categoryId.filter(
+        (el) => el !== category.toString()
+      );
+      searchParams.delete("categoryId");
+      setSearchParams(searchParams);
+      filterParams.map((params) => searchParams.append("categoryId", params));
+      setSearchParams(searchParams);
+    } else {
+      searchParams.append("categoryId", category);
+    }
+    setSearchParams(searchParams);
+  };
   return (
-    <Container>
-      <RecruitTitle>진행중인 채용</RecruitTitle>
-      <RecruitTab>
-        <RecruitTotal>
-          <span>40개</span>의 채용이 있습니다.
-        </RecruitTotal>
-        <RecruitCategories>
-          {CATEGORIES.map((categorie) => {
+    <S.Container ref={recruit}>
+      <S.RecruitTitle>진행중인 채용</S.RecruitTitle>
+      <S.RecruitTab>
+        <S.RecruitTotal>
+          <span>{recruitData !== undefined && recruitData.length}개</span>의
+          채용이 있습니다.
+        </S.RecruitTotal>
+        <S.RecruitCategories>
+          {CATEGORIES.map((category) => {
             return (
-              <CategoriesBtn key={categorie.id}>
-                {categorie.categorie}
-              </CategoriesBtn>
+              <S.CategoriesBtn
+                key={category.id}
+                onClick={() => handleParams(category.id)}
+                categoryId={categoryId}
+                btnId={category.id}
+                // active={{ background: theme.mainColor, color: "white" }}
+              >
+                {category.category}
+              </S.CategoriesBtn>
             );
           })}
-        </RecruitCategories>
-      </RecruitTab>
-      {recruitData.map((recruit) => {
-        return <CrewRecruits key={recruit.id} recruit={recruit} />;
-      })}
-    </Container>
+        </S.RecruitCategories>
+      </S.RecruitTab>
+      {recruitData !== undefined &&
+        recruitData?.map((recruit) => {
+          return <JobOpening key={recruit.reruitId} recruit={recruit} />;
+        })}
+    </S.Container>
   );
 };
-const Container = styled.section`
-  ${(props) => props.theme.variables.flexSet()}
-  flex-direction: column;
-  width: 100%;
-  padding: 40px 0;
-`;
 
-const RecruitTitle = styled.p`
-  font-size: 50px;
-  font-weight: 800;
-  padding: 20px 0;
-`;
-const RecruitTab = styled.div`
-  ${(props) => props.theme.variables.flexSet("space-between", "flex-end")}
-  width: 1200px;
-  margin-bottom: 20px;
-`;
-const RecruitTotal = styled.p`
-  span {
+const S = {
+  Container: styled.section`
+    ${(props) => props.theme.variables.flexSet()}
+    flex-direction: column;
+    width: 100%;
+    padding: 40px 0;
+    background-color: #f5f5f5;
+  `,
+
+  RecruitTitle: styled.p`
+    font-size: 50px;
     font-weight: 800;
-  }
-`;
-const RecruitCategories = styled.div``;
-const CategoriesBtn = styled.button`
-  width: 100px;
-  height: 40px;
-  padding: 10px;
-  margin-left: 15px;
-  font-weight: 600;
-  background-color: ${theme.mainColor};
-`;
+    padding: 20px 0;
+  `,
+
+  RecruitTab: styled.div`
+    ${(props) => props.theme.variables.flexSet("space-between", "flex-end")}
+    width: 1200px;
+    margin-bottom: 20px;
+  `,
+
+  RecruitTotal: styled.p`
+    span {
+      font-weight: 800;
+    }
+  `,
+
+  RecruitCategories: styled.div``,
+
+  CategoriesBtn: styled.button`
+    width: 100px;
+    height: 40px;
+    padding: 10px;
+    margin-left: 15px;
+    font-weight: 600;
+    border: none;
+    color: ${(props) =>
+      props.categoryId.includes(props.btnId.toString()) ? "white" : "black"};
+    background-color: ${(props) =>
+      props.categoryId.includes(props.btnId.toString())
+        ? theme.mainColor
+        : "white"};
+    cursor: pointer;
+  `,
+};
+
 export default Recruit;
 
 const CATEGORIES = [
-  { id: 1, categorie: "프론트엔드" },
-  { id: 2, categorie: "백엔드" },
-  { id: 3, categorie: "풀스택" },
-  { id: 4, categorie: "웹 디자이너" },
+  { id: 6, category: "인사" },
+  { id: 7, category: "경영지원" },
+  { id: 8, category: "홍보/마케팅" },
 ];

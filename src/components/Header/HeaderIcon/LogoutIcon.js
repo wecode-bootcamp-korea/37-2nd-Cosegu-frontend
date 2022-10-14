@@ -1,12 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MdLogout } from "react-icons/md";
 
-const LogoutIcon = () => {
+const LogoutIcon = ({ isLogin, setIsLogin }) => {
+  const navigate = useNavigate();
+  const logoutHandle = () => {
+    localStorage.removeItem("TOKEN");
+    setIsLogin(false);
+    navigate("/");
+  };
+
   return (
-    <Link to="/">
-      <MdLogout size="28px" className="icon" />
-    </Link>
+    isLogin && <MdLogout onClick={logoutHandle} size="28px" className="icon" />
   );
 };
 

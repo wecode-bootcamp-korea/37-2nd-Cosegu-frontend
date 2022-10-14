@@ -7,35 +7,35 @@ import variables from "styles/variables";
 
 const Header = () => {
   return (
-    <Nav>
-      <HeaderWrap>
+    <S.Nav>
+      <S.HeaderWrap>
         <LogoBox to="/">
-          <LogoImg src="https://velog.velcdn.com/images/rayong/post/306bc917-89c3-4217-8d50-1c814c576f57/image.png" />
+          <S.LogoImg src="https://velog.velcdn.com/images/rayong/post/306bc917-89c3-4217-8d50-1c814c576f57/image.png" />
         </LogoBox>
         <HeaderMenu />
         <HeaderIcon />
-      </HeaderWrap>
-    </Nav>
+      </S.HeaderWrap>
+    </S.Nav>
   );
 };
-
-const Nav = styled.div`
-  height: 85px;
-  border-bottom: 1px solid #ddd;
-`;
-
-const HeaderWrap = styled.div`
-  ${variables.flexSet("space-between")};
-  margin: 0 30px;
-  height: 100%;
-`;
 
 const LogoBox = styled(Link)`
   padding-top: 5px;
 `;
 
-const LogoImg = styled.img`
-  width: 180px;
-`;
+const S = {
+  Nav: styled.div`
+    height: 85px;
+    border-bottom: 1px solid #ddd;
+  `,
+  HeaderWrap: styled.div`
+    ${variables.flexSet("space-between")};
+    margin: 0 30px;
+    height: 100%;
+  `,
+  LogoImg: styled.img`
+    width: 180px;
+  `,
+};
 
 export default Header;
