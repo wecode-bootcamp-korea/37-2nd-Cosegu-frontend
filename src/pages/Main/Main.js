@@ -10,20 +10,24 @@ import MainApplyFloat from "./MainApplyFloat";
 const Main = () => {
   const [isFloat, setIsFloat] = useState(false);
 
-  // 이 부분 블로그 정리
-
   const handleScroll = () => {
-    console.log(window.scrollY);
     if (window.scrollY > 700) setIsFloat(true);
     if (window.scrollY > 3030) setIsFloat(false);
     if (window.scrollY < 700) setIsFloat(false);
   };
 
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     window.addEventListener("scroll", handleScroll);
+  //   }, 1000);
+  //   return () => {
+  //     clearInterval(timer);
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // });
+
   useEffect(() => {
-    // const addWindowScroll = () => {
     window.addEventListener("scroll", handleScroll);
-    // };
-    // addWindowScroll();
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
