@@ -10,6 +10,8 @@ import MainApplyFloat from "./MainApplyFloat";
 const Main = () => {
   const [isFloat, setIsFloat] = useState(false);
 
+  // 이 부분 블로그 정리
+
   const handleScroll = () => {
     if (window.scrollY > 700) setIsFloat(true);
     if (window.scrollY > 3030) setIsFloat(false);
