@@ -16,11 +16,18 @@ const Main = () => {
     if (window.scrollY < 700) setIsFloat(false);
   };
 
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     window.addEventListener("scroll", handleScroll);
+  //   }, 1000);
+  //   return () => {
+  //     clearInterval(timer);
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // });
+
   useEffect(() => {
-    const addWindowScroll = () => {
-      window.addEventListener("scroll", handleScroll);
-    };
-    addWindowScroll();
+    window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
