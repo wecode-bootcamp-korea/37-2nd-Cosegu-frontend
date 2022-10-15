@@ -13,16 +13,17 @@ const Main = () => {
   // 이 부분 블로그 정리
 
   const handleScroll = () => {
+    console.log(window.scrollY);
     if (window.scrollY > 700) setIsFloat(true);
     if (window.scrollY > 3030) setIsFloat(false);
     if (window.scrollY < 700) setIsFloat(false);
   };
 
   useEffect(() => {
-    const addWindowScroll = () => {
-      window.addEventListener("scroll", handleScroll);
-    };
-    addWindowScroll();
+    // const addWindowScroll = () => {
+    window.addEventListener("scroll", handleScroll);
+    // };
+    // addWindowScroll();
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
