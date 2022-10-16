@@ -8,12 +8,13 @@ const Mypage = () => {
   const [userInfo, setUserInfo] = useState([]);
 
   useEffect(() => {
-    fetch(`${API.MYPAGE}`, {
-      headers: {
-        authorization: localStorage.getItem("TOKEN"),
-        "Content-Type": "application/json;charset=utf-8",
-      },
-    })
+    fetch("./data/mypageinfo.json")
+      // fetch(`${API.MYPAGE}`, {
+      //   headers: {
+      //     authorization: localStorage.getItem("TOKEN"),
+      //     "Content-Type": "application/json;charset=utf-8",
+      //   },
+      // })
       .then((res) => res.json())
       .then((res) => setUserInfo(res.result));
   }, []);
