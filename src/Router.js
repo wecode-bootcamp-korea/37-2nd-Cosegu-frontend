@@ -10,6 +10,7 @@ import WishList from "pages/WishList/WishList";
 import Mypage from "pages/Mypage/Mypage";
 import Header from "components/Header/Header";
 import Footer from "components/Footer/Footer";
+import Recform from "components/RecForm/RecForm";
 import OAuth from "pages/Login/SocialLogin/OAuth";
 
 const Router = () => {
@@ -26,7 +27,7 @@ const Router = () => {
         <Route path="/crewrecruit" element={<CrewRecruit />} />
         <Route path="/wishlist" element={<WishList />} />
         <Route path="/mypage" element={<Mypage />} />
-        {/* <Route path="/rectform" element={<Rectform />} /> */}
+        <Route path="/recform" element={<Recform />} />
       </Routes>
       <Footer />
     </BrowserRouter>
